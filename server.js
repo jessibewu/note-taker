@@ -19,7 +19,7 @@ app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 })
 
-// Set up the same Get/Post functions here since it's from the same route:
+// Set up the Get/Post functions linking from the same route:
 app.route("/api/notes")
     .get(function (req, res) {
         res.json(database);
@@ -31,12 +31,12 @@ app.route("/api/notes")
         let newNote = req.body;
         let highestNoteId = 100;
 
-        // For loop to loop through the array to find the highest ID.
+        // Loop through the array to find the highest ID.
         for (let i = 0; i < database.length; i++) {
             let individualNote = database[i];
 
             if (individualNote.id > highestNoteId) {
-                // This sets the highestId to be the highest id/number in the array, which is 100.
+                // Set highestId to the highest id/number in the array, which is 100.
                 highestNoteId = individualNote.id;
             }
         }
@@ -54,8 +54,29 @@ app.route("/api/notes")
         res.json(newNote);
     });
 
+// Set up the delete function here:
+app.delete("/api/notes/:id", function (req, res) {
+    let jsonFile = path.join(__dirname, "/db/db.json");
+    // Loop through the array to delete existing note by id.
+    for (let i = 0; i < database.length; i++) {
+        if (database[i].id = req.params.id) {
+            // Remove 1 existing note via splice.
+            database.splice(i, 1);
+            break;
+        }
+    }
+    // Add updated notes back to the db.json file via WriteFile:
+    fs.writeFileSync(jsonFile, JSON.stringify(database), function (err) {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log("Your note has been deleted!");
+        }
+    });
+    res.json(database);
+});
 
-//Listen to PORT & set up the server.
+//Listen to PORT# to set up the server.
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
