@@ -66,15 +66,19 @@ app.delete("/api/notes/:id", function (req, res) {
         }
     }
     // Add updated notes back to the db.json file via WriteFile:
-    fs.writeFileSync(jsonFile, JSON.stringify(database), function (err) {
+    fs.writeFile(jsonFile, JSON.stringify(database), function (err) {
         if (err) {
             return console.log(err);
-        } else {
-            console.log("Your note has been deleted!");
-        }
+        } 
+        console.log("Your note has been deleted!");
+        });
+        res.json(database);
     });
-    res.json(database);
-});
+
+// Using the wildcard * to return the index.html file
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html')); 
+  });
 
 //Listen to PORT# to set up the server.
 app.listen(PORT, function () {
