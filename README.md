@@ -35,6 +35,8 @@
   Below is a screenshot of the application: 
 
   ![Screenshot](./assets/screenshot.png) 
+
+  Link to deployed application: https://obscure-wave-83179.herokuapp.com/
   
   ## License
   This application is covered by [MIT](https://opensource.org/licenses/MIT) license. 
