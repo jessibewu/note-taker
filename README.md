@@ -34,7 +34,7 @@
 
   Below is a screenshot of the application: 
 
-  ![Screenshot](screenshot.png) 
+  ![Screenshot](./assets/screenshot.png) 
   
   ## License
   This application is covered by [MIT](https://opensource.org/licenses/MIT) license. 
